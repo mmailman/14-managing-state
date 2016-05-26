@@ -122,10 +122,11 @@
   };
 
   // COMMENT: What does this method do?  What is it's execution path?
-  
+  // This method is called by the articlesController.index method, which passes in the ctx articles to articleView.index, which is called as the second callback in the '/' route from page as well as any time an author, category, or id filter is applied through page.
+  //This method first shows the html container section for articles (section id=articles)  and hides all sibling emelemnts (the about page section, etc).
   articleView.index = function(articles) {
     $('#articles').show().siblings().hide();
-
+    //this empties out (via removal) any articles in the articles section of the page before continuing on to show all articles passed by context using a forEach loop for each article in the array. The render function called here passes in each individual article and renders them with the Handlebars template (#articles-template), then appends each article to the DOM.
     $('#articles article').remove();
     articles.forEach(function(a) {
       $('#articles').append(render(a));
