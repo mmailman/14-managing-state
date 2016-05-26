@@ -13,6 +13,7 @@
   };
 
   // COMMENT: What does this method do?  What is it's execution path?
+  // This method is attached to the articleView object and is called by the articleView.index method. This method compiles a handlebars template into the template variable after that variable is returned in the options variable. The options variable is defined by author initially, where Article.allAuthors maps the authors from Article.all; returning an array of author names, which is reduced to remove duplicates and return an array of distinct author names.
   articleView.populateFilters = function() {
     var options,
       template = Handlebars.compile($('#option-template').text());
@@ -26,6 +27,8 @@
 
     // Example of using model method with async, SQL-based approach:
     // This approach is DOM-independent, since it reads from the DB directly.
+
+    // Article.allCategories takes a callback function, and grabs the category field from WebDB, then reduces to remove duplicates and return an array of distinct categories.
     Article.allCategories(function(rows) {
       if ($('#category-filter option').length < 2) {
         $('#category-filter').append(
@@ -38,6 +41,7 @@
   };
 
   // COMMENT: What does this method do?  What is it's execution path?
+  // called in the articleView.index method, where in this jQuery object is an event handler that only fires once when/if the select value is changed. The event triggered sets the resource variable to equal the selected filter, where after the regex to format the text sets the route for page, passing the selected filter as a variable in the route for page to use.
   articleView.handleFilters = function() {
     $('#filters').one('change', 'select', function() {
       resource = this.id.replace('-filter', '');
@@ -118,6 +122,7 @@
   };
 
   // COMMENT: What does this method do?  What is it's execution path?
+  
   articleView.index = function(articles) {
     $('#articles').show().siblings().hide();
 
