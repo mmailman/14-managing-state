@@ -134,6 +134,8 @@
 
     articleView.populateFilters();
     // COMMENT: What does this method do?  What is it's execution path?
+    // This method is called here as part of articleView.index, which is called by articlesController.index, which is called by the '/' and all filter routes (author, category,  id) in page's routing.
+    //This method controls a user-selected filter, running a regex to make sure it is transformed in such a way that page can use it as a variable in routing (so that it can be passed as ctx into other functions in the route).
     articleView.handleFilters();
 
     // DONE: Replace setTeasers with just the truncation logic, if needed:
